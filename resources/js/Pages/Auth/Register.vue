@@ -5,7 +5,7 @@
         <form @submit.prevent="formSubmit">
             <div class="title">
                 <h2>{{ $page.props.app.name }}<small>ID</small></h2>
-                <h3>Авторизация</h3>
+                <h3>Регистрация</h3>
             </div>
             <input
                 required
@@ -17,26 +17,45 @@
                 v-model="form.username"
                 :class="{ 'error': form.errors.username }"
             >
+            <p v-if="form.errors.username" class="error-message">{{ form.errors.username }}</p>
+            <input
+                required
+                type="email"
+                placeholder="Адрес электронной почты"
+                autocomplete="email"
+                v-model="form.email"
+                :class="{ 'error': form.errors.email }"
+            >
+            <p v-if="form.errors.email" class="error-message">{{ form.errors.email }}</p>
             <input
                 required
                 type="password"
                 placeholder="Пароль"
-                autocomplete="password"
+                autocomplete="new_password"
                 minlength="8"
                 maxlength="64"
                 v-model="form.password"
                 :class="{ 'error': form.errors.password }"
             >
             <p v-if="form.errors.password" class="error-message">{{ form.errors.password }}</p>
-            <button class="primary" :class="{ 'process': form.processing }" :disabled="form.processing" style="width: 50%; margin-top: 10px" type="submit">
-                Войти
+            <input
+                required
+                type="password"
+                placeholder="Подтверждение пароля"
+                autocomplete="new_password"
+                minlength="8"
+                maxlength="64"
+                v-model="form.password_confirmation"
+                :class="{ 'error': form.errors.password_confirmation }"
+            >
+            <p v-if="form.errors.password" class="error-message">{{ form.errors.password_confirmation }}</p>
+            <button class="primary" :class="{ 'process': form.processing }" :disabled="form.processing" style="width: 70%; margin-top: 10px" type="submit">
+                Зарегистрироваться
             </button>
-            <button class="telegram primary">Войти через <img alt="telegram" src="/storage/media/telegram.svg"></button>
         </form>
 
         <div class="auth-links">
-            <Link :href="route('register.view')">Ещё нет аккаунта?</Link>
-            <a style="">Забыли пароль?</a>
+            <Link :href="route('login.view')">Уже есть аккаунт?</Link>
         </div>
     </div>
 </template>
@@ -82,16 +101,6 @@
         margin: 0;
         font-weight: 500;
     }
-    .telegram {
-        width: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-    }
-    .telegram img {
-        width: 24px;
-    }
     .auth-links {
         display: flex;
         align-items: center;
@@ -103,7 +112,6 @@
 <script>
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import Navbar from "@/Layouts/Navbar.vue";
-import { isEmptyJSON } from '@/utils.js';
 
 export default {
     name: "Login",
@@ -117,14 +125,16 @@ export default {
             form: useForm({
                 _token: this.$page.props.csrf_token,
                 username: '',
-                password: ''
+                email: '',
+                password: '',
+                password_confirmation: ''
             }),
         }
     },
     methods: {
         formSubmit() {
-            this.form.post(route('login.store'), {
-                onFinish: () => this.form.reset('password'),
+            this.form.post(route('register.store'), {
+                onFinish: () => this.form.reset('password', 'password_confirmation'),
             });
         },
     }
