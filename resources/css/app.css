@@ -1,3 +1,111 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+    --gray1: #2d2d2d;
+    --gray2: #3f3f3f;
+    --gray3: #828282;
+    --white: #fff;
+    --blue1: #2F80ED;
+    --red: #EB5757;
+}
+* {
+    font-family: "Montserrat", sans-serif;
+    transition: all .3s ease;
+}
+body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: var(--gray1);
+    color: var(--white);
+}
+#app {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    top: 20px;
+    width: 80%;
+}
+a {
+    text-decoration: none;
+    color: var(--white);
+    cursor: pointer;
+}
+a:hover, button:hover {
+    scale: 1.05;
+    opacity: .8;
+}
+a:active, button:active {
+    scale: .95;
+    opacity: .8;
+}
+a.btn-primary {
+    background-color: var(--blue1);
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 20px;
+    font-size: 18px;
+    cursor: pointer;
+    user-select: none;
+}
+h1 {
+    color: var(--white);
+}
+h2 {
+    color: var(--white);
+}
+h3 {
+    color: var(--white);
+}
+small {
+    color: var(--white);
+}
+input {
+    font-family: "Montserrat", sans-serif;
+}
+button.primary {
+    background-color: var(--blue1);
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 20px;
+    font-size: 18px;
+    cursor: pointer;
+    user-select: none;
+}
+button.process {
+    cursor: progress;
+}
+p.error-message {
+    color: var(--red);
+    margin: 0;
+}
+input[type=text], input[type=password] {
+    width: calc(100% - 40px);
+    border: none;
+    padding: 15px 20px;
+    border-radius: 20px;
+    background-color: var(--gray1);
+    outline: none;
+    color: var(--white);
+    font-size: 18px;
+}
+input[type=text]::placeholder, input[type=password]::placeholder {
+    color: var(--gray3);
+
+}
+input[type=text]:focus, input[type=password]:focus {
+    outline: 1px solid var(--blue1);
+}
+input.error {
+    outline: solid 1px var(--red);
+}

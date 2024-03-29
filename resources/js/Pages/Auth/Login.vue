@@ -1,94 +1,137 @@
-<script setup>
-import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
-
-defineProps({
-    canResetPassword: {
-        type: Boolean,
-    },
-    status: {
-        type: String,
-    },
-});
-
-const form = useForm({
-    email: '',
-    password: '',
-    remember: false,
-});
-
-const submit = () => {
-    form.post(route('login'), {
-        onFinish: () => form.reset('password'),
-    });
-};
-</script>
-
 <template>
-    <GuestLayout>
-        <Head title="Log in" />
-
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-            {{ status }}
-        </div>
-
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="email" value="Email" />
-
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autofocus
-                    autocomplete="username"
-                />
-
-                <InputError class="mt-2" :message="form.errors.email" />
+    <Head title="Авторизация" />
+    <Navbar/>
+    <div class="container">
+        <form @submit.prevent="formSubmit">
+            <div class="title">
+                <h2>{{ $page.props.app.name }}<small>ID</small></h2>
+                <h3>Авторизация</h3>
             </div>
-
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="current-password"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="block mt-4">
-                <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600">Remember me</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <Link
-                    v-if="canResetPassword"
-                    :href="route('password.request')"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                    Forgot your password?
-                </Link>
-
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
-                </PrimaryButton>
+            <input
+                required
+                type="text"
+                placeholder="Никнейм"
+                autocomplete="username"
+                maxlength="16"
+                v-model="form.username"
+                :class="{ 'error': !isEmptyJSON(form.errors) }"
+            >
+            <input
+                required
+                type="password"
+                placeholder="Пароль"
+                autocomplete="password"
+                maxlength="64"
+                v-model="form.password"
+                :class="{ 'error': !isEmptyJSON(form.errors) }"
+            >
+            <p v-if="form.errors.password" class="error-message">{{ form.errors.password }}</p>
+            <button class="primary" :class="{ 'process': form.processing }" :disabled="form.processing" style="width: 100%" type="submit">
+                Войти
+            </button>
+            <div class="media">
+                <a class="telegram"/>
             </div>
         </form>
-    </GuestLayout>
+
+        <div class="auth-links">
+            <a style="">Ещё нет аккаунта?</a>
+            <a style="">Забыли пароль?</a>
+        </div>
+    </div>
 </template>
+
+<style scoped>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        top: 50px;
+        position: relative;
+        width: 30%;
+    }
+    form {
+
+        background-color: var(--gray2);
+        padding: 20px;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+    }
+    form .title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+    form .title h2 {
+        display: flex;
+        margin: 0;
+        font-weight: 600;
+    }
+    form .title h2 small {
+        font-size: 16px;
+    }
+    form .title h3 {
+        margin: 0;
+        font-weight: 500;
+    }
+    .media {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+    }
+    .auth-links {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-around;
+    }
+    .media a {
+        width: 48px;
+        height: 48px;
+    }
+    .media a.telegram {
+        background-image: url("/storage/media/telegram.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+<script>
+import { Head, Link, useForm } from "@inertiajs/vue3";
+import Navbar from "@/Layouts/Navbar.vue";
+import { isEmptyJSON } from '@/utils.js';
+
+export default {
+    name: "Login",
+    components: {
+        Navbar,
+        Head,
+        Link
+    },
+    data() {
+        return {
+            form: useForm({
+                username: '',
+                password: '',
+            }),
+        }
+    },
+    methods: {
+        isEmptyJSON,
+        formSubmit() {
+            this.form.post(route('login.store'), {
+                onFinish: () => this.form.reset('password'),
+            });
+        }
+    }
+}
+</script>
