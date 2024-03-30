@@ -9,6 +9,7 @@
                 <a>Новости</a>
             </div>
             <Link v-if="!this.$page.props.auth.user" :href="route('login.view')" style="padding: 10px 40px" class="btn-primary">Войти</Link>
+            <Link v-else :href="route('index.view')" class="head" :style="{ 'background-image': `url(${route('storage.get-head', { username: this.$page.props.auth.user.username, size: 64 })})` }"></Link>
         </div>
     </div>
 </template>

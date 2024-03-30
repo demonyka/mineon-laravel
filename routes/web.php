@@ -1,10 +1,7 @@
 <?php
 
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +17,4 @@ use Inertia\Inertia;
 Route::get('/', [IndexController::class, 'view'])->name('index.view');
 
 require __DIR__.'/auth.php';
+require __DIR__.'/storage.php';
