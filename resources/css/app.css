@@ -85,6 +85,7 @@ button.primary {
 }
 button.process {
     cursor: progress;
+    opacity: .5;
 }
 p.error-message {
     color: var(--red);
