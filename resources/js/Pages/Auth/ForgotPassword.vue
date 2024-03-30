@@ -1,5 +1,5 @@
 <template>
-    <Head title="Авторизация" />
+    <Head title="Восстановление пароля" />
     <Navbar/>
     <div class="container">
         <form @submit.prevent="formSubmit">
@@ -99,9 +99,7 @@ export default {
     },
     methods: {
         formSubmit() {
-            this.form.post(route('login.store'), {
-                onFinish: () => this.form.reset('username'),
-            });
+            this.form.post(route('forgot-password.store'));
         },
     }
 }

@@ -1,4 +1,5 @@
 <template>
+    <FlashMessage v-if="$page.props.flash.message" :message="$page.props.flash.message"/>
     <div class="navbar">
         <div class="nav-content">
             <Link :href="route('index.view')" class="title">MiNEON</Link>
@@ -48,9 +49,11 @@ a.head {
 
 <script>
 import { Link } from '@inertiajs/vue3';
+import FlashMessage from "@/Components/FlashMessage.vue";
 export default {
     name: "Navbar",
     components: {
+        FlashMessage,
         Link,
     },
     methods: {

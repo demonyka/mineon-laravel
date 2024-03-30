@@ -5,6 +5,9 @@
     --white: #fff;
     --blue1: #2F80ED;
     --red: #EB5757;
+    --green1: #219653;
+    --green2: #27AE60;
+    --green3: #6FCF97;
 }
 * {
     font-family: "Montserrat", sans-serif;
@@ -115,4 +118,10 @@ input[type=email]:focus {
 }
 input.error {
     outline: solid 1px var(--red);
+}
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.3s ease;
+}
+.fade-enter-from, .fade-leave-to {
+    opacity: 0;
 }
