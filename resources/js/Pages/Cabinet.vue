@@ -1,15 +1,21 @@
 <template>
     <Head :title="$page.props.auth.user.username" />
     <Navbar/>
+    <transition name="fade">
+        <div v-if="uploadMessage.message" id="uploadMessage" class="flash" :class="`${uploadMessage.type}`">
+            {{ uploadMessage.message }}
+        </div>
+    </transition>
     <div class="container">
         <div class="column">
             <div class="row">
                 <h2>Персонализация</h2>
                 <div class="skin3d">
                     <canvas ref="skinContainer"></canvas>
-                    <form class="upload">
-                        <button type="button" class="primary" style="width: 100%">Загрузить скин</button>
-                    </form>
+                    <div class="upload">
+                        <input @change="handleFileUpload('skin')" ref="skinInput" type="file" accept="image/png" style="display: none">
+                        <button :disabled="isLoading.skin" @click="triggerFileInput('skinInput')" type="button" class="primary" style="width: 100%">Загрузить скин</button>
+                    </div>
 
                 </div>
             </div>
@@ -95,10 +101,71 @@ export default {
     },
     data() {
         return {
-            uploadMessage: {}
+            uploadMessage: {},
+            isLoading: {
+                skin: false,
+                cape: false
+            },
         }
     },
     methods: {
+        setUploadMessage(text, type) {
+            this.uploadMessage.message = text;
+            this.uploadMessage.type = type;
+
+            setTimeout(() => {
+                this.uploadMessage = {}
+            }, 5000);
+        },
+        handleFileUpload(type) {
+            const file = event.target.files[0];
+            if (!file) return this.isLoading[type] = false;
+            if (!file.name.endsWith('.png')) {
+                this.setUploadMessage('Файл должен быть в формате .png', 'error');
+                this.isLoading[type] = false;
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    const validDimensions = (img.width === 64 && img.height === 64) ||
+                        (img.width === 64 && img.height === 32);
+                    if (!validDimensions) {
+                        this.isLoading[type] = false;
+                        this.setUploadMessage('Размер изображения должен быть 64x64 или 64x32 пикселей', 'error');
+                        return;
+                    }
+                    const formData = new FormData();
+                    formData.append(type, file);
+
+                    axios.post(route(`cabinet.${type}-upload`), formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                        },
+                    })
+                        .then(response => {
+                            this.isLoading[type] = false;
+                            this.loadSkin();
+                            this.setUploadMessage(response.data.success, 'success');
+                        })
+                        .catch(error => {
+                            this.isLoading[type] = false;
+                            this.setUploadMessage(error.response.data[type], 'error');
+                        });
+                };
+                img.onerror = () => {
+                    this.isLoading[type] = false;
+                    this.setUploadMessage('Произошла ошибка при загрузке файла', 'error');
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        },
+        triggerFileInput(refName) {
+            this.$refs[refName].click();
+        },
         getGreeting() {
             const currentTime = new Date();
             const currentHour = currentTime.getHours();
