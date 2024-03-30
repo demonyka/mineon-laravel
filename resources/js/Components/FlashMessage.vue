@@ -41,4 +41,7 @@ export default {
     .flash.success {
         background-color: var(--green1);
     }
+    .flash.error {
+        background-color: var(--red);
+    }
 </style>

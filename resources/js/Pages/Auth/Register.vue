@@ -1,5 +1,5 @@
 <template>
-    <Head title="Авторизация" />
+    <Head title="Регистрация" />
     <Navbar/>
     <div class="container">
         <form @submit.prevent="formSubmit">

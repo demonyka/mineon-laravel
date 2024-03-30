@@ -31,9 +31,15 @@ class ForgotPasswordController extends Controller
             }
         }
         $token = Str::random(64);
+        try {
+            Mail::to($user->email)->send(new ResetPasswordMail($token));
+        } catch (\Exception) {
+            return redirect()->route('login.view')
+                ->with('message', ['type' => 'error', 'text' => 'Произошла ошибка, попробуйте позже']);
+        }
         Cache::put("reset_password_token_{$token}", $user->username, now()->addMinutes(10));
         Cache::put("reset_password_{$user->username}", $request->ip(), now()->addMinutes(10));
-        Mail::to($user->email)->send(new ResetPasswordMail($token));
+
         return redirect()->route('login.view')
             ->with('message', ['type' => 'success', 'text' => 'Запрос на восстановление пароля отправлен']);
     }
