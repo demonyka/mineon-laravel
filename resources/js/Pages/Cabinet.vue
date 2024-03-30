@@ -16,7 +16,6 @@
                         <input @change="handleFileUpload('skin')" ref="skinInput" type="file" accept="image/png" style="display: none">
                         <button :disabled="isLoading.skin" @click="triggerFileInput('skinInput')" type="button" class="primary" style="width: 100%">Загрузить скин</button>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -31,7 +30,20 @@
         </div>
         <div class="column">
             <div class="row">
+                <h2>Баланс</h2>
 
+                <div class="main-info" style="">
+                    <p style="font-size: 20px; margin-bottom: 5px">Коинов: 1000000$</p>
+                    <button class="primary">Пополнить</button>
+                </div>
+            </div>
+            <div class="row">
+                <h2>Безопасность</h2>
+                <div class="main-info">
+                    <button class="primary">Смена пароля</button>
+                    <button class="primary">Привязать Telegram</button>
+                    <button @click="$inertia.visit(route('auth.logout'))" class="primary">Выход</button>
+                </div>
             </div>
         </div>
     </div>
@@ -48,6 +60,9 @@
     }
     .column {
         width: calc(33% - 10px);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
     }
     .row {
         width: calc(100% - 80px);
@@ -58,17 +73,17 @@
     h2 {
         margin: 0;
         font-weight: 500;
-        font-size: 22px;
+        font-size: 24px;
     }
     p {
         margin: 0;
         font-size: 18px;
     }
     .main-info {
-        margin-top: 20px;
+        margin-top: 15px;
         display: flex;
         flex-direction: column;
-        gap: 7px;
+        gap: 10px;
     }
     .skin3d {
         display: flex;

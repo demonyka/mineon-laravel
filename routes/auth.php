@@ -23,7 +23,7 @@ Route::prefix('/auth')->group(function () {
 
     Route::middleware('auth')->group(function () {
         Route::any('/logout', [LoginController::class, 'destroy'])
-            ->name('/logout');
+            ->name('auth.logout');
     });
 });
 
