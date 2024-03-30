@@ -47,10 +47,10 @@
         width: 100%;
     }
     .column {
-        width: calc(33% - 20px);
+        width: calc(33% - 10px);
     }
     .row {
-        width: calc(100% - 70px);
+        width: calc(100% - 80px);
         background-color: var(--gray2);
         padding: 20px 40px;
         border-radius: 20px;
