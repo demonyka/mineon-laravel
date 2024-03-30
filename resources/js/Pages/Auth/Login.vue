@@ -107,12 +107,10 @@
 <script>
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import Navbar from "@/Layouts/Navbar.vue";
-import FlashMessage from "@/Components/FlashMessage.vue";
 
 export default {
     name: "Login",
     components: {
-        FlashMessage,
         Navbar,
         Head,
         Link

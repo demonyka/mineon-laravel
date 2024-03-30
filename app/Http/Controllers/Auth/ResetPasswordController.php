@@ -20,7 +20,7 @@ class ResetPasswordController extends Controller
         $user = User::where('username', $username)->firstOrFail();
         $ip = Cache::get("reset_password_{$user->username}");
         if($ip !== $request->ip()) {
-            abort(401);
+            abort(403);
         }
         return inertia('Auth/ResetPassword', ['username' => $user->username, 'token' => $token]);
     }
@@ -37,7 +37,7 @@ class ResetPasswordController extends Controller
         $user = User::where('username', $username)->firstOrFail();
         $ip = Cache::get("reset_password_{$user->username}");
         if($ip !== $request->ip()) {
-            abort(401);
+            abort(403);
         }
 
         $user->password = Hash::make($request->password);
