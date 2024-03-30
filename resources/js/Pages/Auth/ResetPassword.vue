@@ -41,7 +41,7 @@
                 :class="{ 'error': form.errors.password_confirmation }"
             >
             <p v-if="form.errors.password_confirmation" class="error-message">{{ form.errors.password_confirmation }}</p>
-            <button class="primary" :class="{ 'process': form.processing }" :disabled="form.processing" style="width: 50%; margin-top: 10px" type="submit">
+            <button class="primary" :disabled="form.processing" style="width: 50%; margin-top: 10px" type="submit">
                 Изменить пароль
             </button>
         </form>

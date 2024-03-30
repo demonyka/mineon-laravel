@@ -118,6 +118,7 @@ export default {
             }, 5000);
         },
         handleFileUpload(type) {
+            this.isLoading[type] = true;
             const file = event.target.files[0];
             if (!file) return this.isLoading[type] = false;
             if (!file.name.endsWith('.png')) {

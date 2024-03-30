@@ -98,9 +98,12 @@ button.primary {
     user-select: none;
     height: 45px;
 }
-button.process {
-    cursor: progress;
+button:disabled {
+    cursor: default;
     opacity: .5;
+}
+button:hover:disabled {
+    scale: 1;
 }
 p.error-message {
     color: var(--red);

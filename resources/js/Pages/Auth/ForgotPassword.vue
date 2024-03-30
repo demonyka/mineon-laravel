@@ -18,7 +18,7 @@
                 :class="{ 'error': form.errors.username }"
             >
             <p v-if="form.errors.username" class="error-message">{{ form.errors.username }}</p>
-            <button class="primary" :class="{ 'process': form.processing }" :disabled="form.processing" style="width: 50%; margin-top: 10px" type="submit">
+            <button class="primary" :disabled="form.processing" style="width: 50%; margin-top: 10px" type="submit">
                 Восстановить
             </button>
         </form>

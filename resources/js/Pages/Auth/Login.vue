@@ -28,7 +28,7 @@
                 :class="{ 'error': form.errors.password }"
             >
             <p v-if="form.errors.password" class="error-message">{{ form.errors.password }}</p>
-            <button class="primary" :class="{ 'process': form.processing }" :disabled="form.processing" style="width: 50%; margin-top: 10px" type="submit">
+            <button class="primary" :disabled="form.processing" style="width: 50%; margin-top: 10px" type="submit">
                 Войти
             </button>
         </form>
@@ -80,16 +80,6 @@
     form .title h3 {
         margin: 0;
         font-weight: 500;
-    }
-    .telegram {
-        width: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 7px;
-    }
-    .telegram svg {
-        width: 24px;
     }
     .auth-links {
         display: flex;
