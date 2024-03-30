@@ -29,6 +29,16 @@ class SkinController extends Controller
 
     /**
      * @param $username
+     * @return Response
+     * @throws BindingResolutionException
+     */
+    public function getCape($username)
+    {
+        return $this->skinService->getCape($username);
+    }
+
+    /**
+     * @param $username
      * @param Request $request
      * @return Response
      * @throws BindingResolutionException

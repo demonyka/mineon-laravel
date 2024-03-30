@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CabinetController;
 use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [IndexController::class, 'view'])->name('index.view');
+
+Route::middleware('auth')->group(function () {
+   Route::get('/cabinet', [CabinetController::class, 'view'])->name('cabinet.view');
+   Route::post('/cabinet/skin-upload', [CabinetController::class, 'skinUpload'])->name('cabinet.skin-upload');
+});
 
 require __DIR__.'/auth.php';
 require __DIR__.'/storage.php';

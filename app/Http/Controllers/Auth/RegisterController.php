@@ -45,7 +45,6 @@ class RegisterController extends Controller
 
         Auth::login($user, true);
 
-        return redirect()->route('index.view')
-            ->with('message', ['type' => 'success', 'text' => 'Аккаунт успешно создан']);
+        return redirect()->route('cabinet.view');
     }
 }
