@@ -23,7 +23,7 @@
                 required
                 type="password"
                 placeholder="Пароль"
-                autocomplete="new_password"
+                autocomplete="new-password"
                 minlength="8"
                 maxlength="64"
                 v-model="form.password"
@@ -34,7 +34,7 @@
                 required
                 type="password"
                 placeholder="Подтверждение пароля"
-                autocomplete="new_password"
+                autocomplete="new-password"
                 minlength="8"
                 maxlength="64"
                 v-model="form.password_confirmation"

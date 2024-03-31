@@ -11,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 /**
  * @property string $username
+ * @property double $coins
  */
 class User extends Authenticatable
 {
@@ -25,6 +26,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'coins'
     ];
 
     /**
