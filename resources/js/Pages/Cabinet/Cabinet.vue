@@ -30,10 +30,7 @@
         </div>
         <div class="column">
             <Balance/>
-            <div class="row" style="min-height: 190px">
-                <Security/>
-            </div>
-
+            <Security/>
         </div>
     </div>
 </template>
