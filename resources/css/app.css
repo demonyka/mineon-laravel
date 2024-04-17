@@ -212,6 +212,9 @@ input.error {
     p, button, input {
         font-size: 0.9rem !important;
     }
+    small {
+        font-size: 0.75rem !important;
+    }
     .cabinet .main-info {
         margin-top: 10px;
     }
