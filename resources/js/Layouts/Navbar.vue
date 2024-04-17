@@ -9,7 +9,7 @@
                 <a>Правила</a>
                 <a>Новости</a>
             </div>
-            <Link v-if="!this.$page.props.auth.user" :href="route('login.view')" style="padding: 10px 40px" class="btn-primary">Войти</Link>
+            <Link v-if="!this.$page.props.auth.user" :href="route('login.view')" class="btn-primary login">Войти</Link>
             <Link v-else :href="route('cabinet.view')" class="head" :style="{ 'background-image': `url(${route('storage.get-head', { username: this.$page.props.auth.user.username, size: 64 })})` }"></Link>
             <svg class="mobile-menu" width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4 6H20M4 12H20M4 18H20" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -24,6 +24,9 @@
         display: none !important;
     }
     a.head {
+        display: none !important;
+    }
+    a.login {
         display: none !important;
     }
     svg.mobile-menu {
@@ -61,6 +64,9 @@ a.head {
     height: 40px;
     background-size: cover;
     border-radius: 10px;
+}
+a.login {
+    padding: 10px 40px
 }
 </style>
 
