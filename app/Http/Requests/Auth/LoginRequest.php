@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -49,6 +50,10 @@ class LoginRequest extends FormRequest
                 'username' => trans('auth.failed')
             ]);
         }
+
+        $user = Auth::user();
+        $user->last_login = Carbon::now();
+        $user->save();
 
         RateLimiter::clear($this->throttleKey());
     }

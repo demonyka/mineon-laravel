@@ -4,7 +4,7 @@
             <h2>Безопасность</h2>
             <div class="main-info">
                 <button @click="openChangePassword" class="primary">Смена пароля</button>
-                <button class="primary">Привязать Telegram</button>
+                <button disabled class="primary">Привязать Telegram</button>
                 <button @click="$inertia.visit(route('auth.logout'))" class="primary">Выход</button>
             </div>
         </div>
