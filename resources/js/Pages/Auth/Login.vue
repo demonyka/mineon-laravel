@@ -1,7 +1,7 @@
 <template>
     <Head title="Авторизация" />
     <Navbar/>
-    <div class="container">
+    <div class="auth-container">
         <form @submit.prevent="formSubmit">
             <div class="title">
                 <h2>{{ $page.props.app.name }}<small>ID</small></h2>
@@ -28,7 +28,7 @@
                 :class="{ 'error': form.errors.password }"
             >
             <p v-if="form.errors.password" class="error-message">{{ form.errors.password }}</p>
-            <button class="primary" :disabled="form.processing" style="width: 50%; margin-top: 10px" type="submit">
+            <button class="primary" :disabled="form.processing" style="padding: 10px 60px; margin-top: 15px" type="submit">
                 Войти
             </button>
         </form>
@@ -41,7 +41,7 @@
 </template>
 
 <style scoped>
-    .container {
+    .auth-container {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -51,16 +51,13 @@
         width: 30%;
     }
     form {
-
         background-color: var(--gray2);
         padding: 20px;
         border-radius: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        width: 100%;
+        text-align: center;
+    }
+    form input {
+        margin-top: 10px;
     }
     form .title {
         display: flex;

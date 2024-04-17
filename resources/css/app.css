@@ -209,7 +209,7 @@ input.error {
     h1, h2 {
         font-size: 1rem !important;
     }
-    p, button {
+    p, button, input {
         font-size: 0.9rem !important;
     }
     .cabinet .main-info {
@@ -226,6 +226,15 @@ input.error {
     }
     .cabinet .row {
         width: auto !important;
+    }
+    .auth-container {
+        width: 100% !important;
+        gap: 15px !important;
+        top: 20px !important;
+    }
+    .auth-links {
+        flex-direction: column;
+        gap: 15px;
     }
 
 }
