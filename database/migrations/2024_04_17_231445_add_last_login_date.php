@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->datetime('last_login')->after('remember_token')->nullable();
+            $table->datetime('last_login')->after('remember_token')->default(now());
         });
     }
 
