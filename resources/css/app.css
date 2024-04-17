@@ -150,6 +150,7 @@ input.error {
     color: var(--white);
     max-width: 40vw;
     text-align: center;
+    z-index: 1000;
 }
 .flash.success {
     background-color: var(--green1);
@@ -239,5 +240,10 @@ input.error {
         flex-direction: column;
         gap: 15px;
     }
-
+    .flash {
+        max-width: calc(80vw - 20px) !important;
+        padding: 10px !important;
+        right: auto !important;
+        transform: none !important;
+    }
 }
