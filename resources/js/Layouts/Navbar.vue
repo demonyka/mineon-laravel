@@ -2,7 +2,7 @@
     <FlashMessage v-if="$page.props.flash.message" :message="$page.props.flash.message"/>
     <div class="navbar">
         <div class="nav-content">
-            <Link :href="route('index.view')" class="title">MiNEON</Link>
+            <Link :href="route('index.view')" class="title">{{ $page.props.app.name }}</Link>
             <div class="links">
                 <Link :href="route('index.view')">Главная</Link>
                 <a>Сервера</a>
