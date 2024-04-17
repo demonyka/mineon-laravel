@@ -39,7 +39,12 @@
 </template>
 
 <style scoped>
-
+@media screen and (max-width: 1150px) {
+    canvas {
+        width: 250px !important;
+        height: 250px !important;
+    }
+}
 </style>
 
 <script>

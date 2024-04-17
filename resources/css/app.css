@@ -205,3 +205,27 @@ input.error {
     align-items: center;
     width: 100%;
 }
+@media screen and (max-width: 1150px) {
+    h1, h2 {
+        font-size: 1rem !important;
+    }
+    p, button {
+        font-size: 0.9rem !important;
+    }
+    .cabinet .main-info {
+        margin-top: 10px;
+    }
+    .cabinet {
+        flex-direction: column;
+        gap: 20px;
+        top: 20px;
+        padding-bottom: 20px;
+    }
+    .column {
+        width: 100% !important;
+    }
+    .cabinet .row {
+        width: auto !important;
+    }
+
+}

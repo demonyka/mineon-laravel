@@ -28,7 +28,7 @@
                     </defs>
                 </svg>
             </p>
-            <button disabled style="margin-top: 5px" class="primary">Пополнить</button>
+            <button disabled class="primary">Пополнить</button>
         </div>
     </div>
 </template>

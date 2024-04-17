@@ -11,11 +11,28 @@
             </div>
             <Link v-if="!this.$page.props.auth.user" :href="route('login.view')" style="padding: 10px 40px" class="btn-primary">Войти</Link>
             <Link v-else :href="route('cabinet.view')" class="head" :style="{ 'background-image': `url(${route('storage.get-head', { username: this.$page.props.auth.user.username, size: 64 })})` }"></Link>
+            <svg class="mobile-menu" width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 6H20M4 12H20M4 18H20" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </div>
     </div>
 </template>
 
 <style scoped>
+@media screen and (max-width: 1150px) {
+    .links {
+        display: none !important;
+    }
+    a.head {
+        display: none !important;
+    }
+    svg.mobile-menu {
+        display: block !important;
+    }
+}
+svg.mobile-menu {
+    display: none;
+}
 .navbar {
     border-radius: 30px;
     width: 80vw;
